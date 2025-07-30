@@ -33,14 +33,24 @@ async def sync(ctx: commands.Context):
 
 @bot.event
 async def on_message(message: discord.Message):
-    if message.content.startswith(
-        f"{bot.user.mention} is this real"
-    ) or message.content.startswith("@gork is this real"):
+    if (
+        message.content.lower().startswith(f"{bot.user.mention} is this real")
+        or message.content.lower().startswith("@gork is this real")
+        or message.content.lower().startswith(f"is this real {bot.user.mention}")
+        or message.content.lower().startswith(f"is this real @gork")
+    ):
         c = random.randint(0, 99)
         if c == 99:
             await message.reply("probably")
         else:
             await message.reply("idk you figure it out")
+    elif (
+        message.content.lower().startswith(f"{bot.user.mention} are you real")
+        or message.content.lower().startswith(f"@gork are you real")
+        or message.content.lower().startswith(f"are you real {bot.user.mention}")
+        or message.content.lower().startswith(f"are you real @gork")
+    ):
+        await message.reply("yeh")
 
     await bot.process_commands(message)
 
