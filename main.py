@@ -1,7 +1,10 @@
 import discord
 from discord.ext import commands
 import random
-import config
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 bot = commands.Bot(
     command_prefix="g.", intents=discord.Intents(message_content=True, messages=True)
@@ -67,4 +70,4 @@ async def on_message(message: discord.Message):
     await bot.process_commands(message)
 
 
-bot.run(config.DISCORD_TOKEN)
+bot.run(os.getenv("DISCORD_TOKEN"))
